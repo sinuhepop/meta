@@ -1,0 +1,145 @@
+<class-diagram version="1.0.10" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="false" dependencies="false" nesting-relationships="false">  
+  <interface id="1" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Gettable" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Gettable.java" binary="false">    
+    <position height="-1" width="-1" x="690" y="467"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="2" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Member" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Member.java" binary="false">    
+    <position height="62" width="105" x="791" y="97"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="3" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Function" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Function.java" binary="false">    
+    <position height="28" width="104" x="389" y="284"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="4" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Setter" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Setter.java" binary="false">    
+    <position height="-1" width="-1" x="713" y="382"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="5" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Method" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Method.java" binary="false">    
+    <position height="45" width="98" x="533" y="199"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="6" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Field" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Field.java" binary="false">    
+    <position height="-1" width="-1" x="980" y="215"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Settable" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Settable.java" binary="false">    
+    <position height="-1" width="-1" x="854" y="468"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="8" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Getter" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Getter.java" binary="false">    
+    <position height="28" width="91" x="522" y="369"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="9" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Action" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Action.java" binary="false">    
+    <position height="45" width="82" x="533" y="284"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <interface id="10" corner="BOTTOM_RIGHT" language="java" name="tk.spop.meta.reflect.model.Constructor" project="meta" 
+    file="/meta/src/main/java/tk/spop/meta/reflect/model/Constructor.java" binary="false">    
+    <position height="45" width="114" x="787" y="199"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+      visibility="false">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="true" package="false" protected="false" private="false"/>    
+    </display>  
+  </interface>  
+  <generalization id="11">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="9"/>  
+  </generalization>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <generalization id="13">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="14">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="15">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="16">    
+    <bendpoint x="931" y="284"/>    
+    <bendpoint x="931" y="199"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="17">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="18">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="20">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="false" package="false" initial-value="false" signature="false" 
+    visibility="false">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="true" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="false" multiplicity="false"/>
+</class-diagram>
