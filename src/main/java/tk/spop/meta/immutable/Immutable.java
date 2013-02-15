@@ -1,13 +1,5 @@
 package tk.spop.meta.immutable;
 
-import java.lang.annotation.*;
+public interface Immutable extends StructurallyImmutable {
 
-import tk.spop.meta.Meta;
-
-@Meta
-@Documented
-@Target({ java.lang.annotation.ElementType.TYPE })
-@Retention(RetentionPolicy.RUNTIME)
-@Inherited
-public @interface Immutable {
 }

@@ -6,7 +6,6 @@ import javax.annotation.processing.*;
 import javax.lang.model.element.*;
 import javax.tools.Diagnostic;
 
-
 public abstract class ProcessorAdapter extends AbstractProcessor {
 
     public Set<String> getSupportedAnnotationTypes() {
@@ -23,11 +22,9 @@ public abstract class ProcessorAdapter extends AbstractProcessor {
         return super.getSupportedAnnotationTypes();
     }
 
-
     protected Class<?>[] getSupportedAnnotations() {
         return null;
     }
-
 
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {
         if ((!env.processingOver()) && (!env.errorRaised())) {
@@ -38,8 +35,14 @@ public abstract class ProcessorAdapter extends AbstractProcessor {
                         case CLASS:
                             processClass((TypeElement) element, annotation, env);
                             break;
+                        case INTERFACE:
+                            processInterface((TypeElement) element, annotation, env);
+                            break;
+                        case ANNOTATION_TYPE:
+                            processAnnotation((TypeElement) element, annotation, env);
+                            break;
                         default:
-                            unsupported(element.getKind().name(), annotation);
+                            unsupportedAnnotation(element, annotation);
                     }
                 }
 
@@ -50,16 +53,21 @@ public abstract class ProcessorAdapter extends AbstractProcessor {
         return false;
     }
 
-
     protected void processClass(TypeElement element, TypeElement annotation, RoundEnvironment env) {
-        unsupported("Class", annotation);
+        unsupportedAnnotation(element, annotation);
     }
 
-
-    private void unsupported(String processType, TypeElement annotation) {
-        throw new UnsupportedOperationException(processType + " process is not implemented for annotation " + annotation.getQualifiedName());
+    protected void processInterface(TypeElement element, TypeElement annotation, RoundEnvironment env) {
+        unsupportedAnnotation(element, annotation);
     }
 
+    protected void processAnnotation(TypeElement element, TypeElement annotation, RoundEnvironment env) {
+        unsupportedAnnotation(element, annotation);
+    }
+
+    private void unsupportedAnnotation(Element element, TypeElement annotation) {
+        error("Annotation " + annotation.getQualifiedName() + " is not supported on " + element.getKind().name(), element);
+    }
 
     protected void error(String msg, Element element) {
         this.processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, msg, element);

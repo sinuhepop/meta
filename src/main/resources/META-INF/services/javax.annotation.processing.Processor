@@ -1,1 +1,3 @@
+tk.spop.meta.iface.InterfaceProcessor
+tk.spop.meta.reflect.ReflectiveProcessor
 tk.spop.meta.immutable.ImmutableProcessor

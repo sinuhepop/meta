@@ -1,10 +1,10 @@
 package tk.spop.meta.reflect.model;
 
-public interface Constructor<C> extends Member<C> {
+public interface Constructor<C> extends Invocable<C> {
 
     C invoke(Object[] args);
 
     @Override
-    java.lang.reflect.Constructor<C> unwrap();
+    java.lang.reflect.Constructor<C> getJavaMember();
 
 }
