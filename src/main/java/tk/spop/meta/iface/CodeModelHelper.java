@@ -1,6 +1,8 @@
 package tk.spop.meta.iface;
 
-import javax.lang.model.element.TypeElement;
+import java.util.*;
+
+import javax.lang.model.element.*;
 import javax.lang.model.type.*;
 
 import lombok.*;
@@ -11,6 +13,7 @@ import com.sun.codemodel.*;
 public class CodeModelHelper {
 
     private final JCodeModel model;
+    private final Map<String, JTypeVar> genericMap = new HashMap<>();
 
     public JType getType(TypeMirror mirror) {
         switch (mirror.getKind()) {
@@ -57,8 +60,8 @@ public class CodeModelHelper {
                 return model.SHORT;
             case TYPEVAR:
                 val typeVariable = (TypeVariable) mirror;
-                val obj = (JGenerifiable) model.ref(Object.class);
-                val typeVar = obj.generify(typeVariable.toString());
+                val id = typeVariable.toString();
+                val typeVar = genericMap.get(id);
                 return typeVar;
             case UNION:
                 break;
@@ -83,6 +86,23 @@ public class CodeModelHelper {
                 break;
         }
         throw new RuntimeException("Kind not supported: " + mirror.getKind());
+    }
+
+    public void generify(Parameterizable element, JGenerifiable generifiable) {
+        for (val typeParameter : element.getTypeParameters()) {
+            val bounds = new JTypeMultiple(null);
+            for (val bound : typeParameter.getBounds()) {
+                val boundClass = (JClass) getType(bound);
+                bounds.bound(boundClass);
+            }
+            val typeVar = generifiable.generify(typeParameter.getSimpleName().toString(), bounds);
+            addGeneric(typeVar);
+        }
+    }
+
+    private void addGeneric(JTypeVar type) {
+        String id = type.name();
+        genericMap.put(id, type);
     }
 
 }

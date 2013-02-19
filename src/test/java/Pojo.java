@@ -1,5 +1,5 @@
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 
 import tk.spop.meta.Meta;
 import tk.spop.meta.iface.Interface;
@@ -17,13 +17,24 @@ public class Pojo<Z, X extends Number & Serializable, Y extends List<? super Met
     public List<String> c(Integer[] a) {
         return null;
     }
-    
-    public List<X> c(Y[] a) {
+
+    public X d() {
         return null;
     }
 
-    // public List<Map<? extends Comparable<T>, T>> b() {
-    // return null;
-    // }
+    public List<X> e() {
+        return null;
+    }
 
+    public List<? extends X> f() {
+        return null;
+    }
+
+    public List<Map<? extends Comparable<Y>, X>> g() {
+        return null;
+    }
+
+    public <T> T first(Iterable<T> iterable) {
+        return null;
+    }
 }

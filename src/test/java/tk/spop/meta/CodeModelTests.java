@@ -59,7 +59,7 @@ public class CodeModelTests {
 
         JCodeModel model = new JCodeModel();
         val type = model._class("tk.spop.meta.Test", ClassType.INTERFACE);
-        
+
         type.generify("T", Immutable.class);
 
         val method = type.method(JMod.NONE, model.VOID, "x");
@@ -70,6 +70,25 @@ public class CodeModelTests {
         method.param(par1, "map");
         method.param(typeS, "lololo");
         method.body()._return(model.NULL.dotclass());
+
+        StringCodeWriter writer = new StringCodeWriter();
+        model.build(writer);
+        System.out.println(writer.toString());
+    }
+
+    @Test
+    @SneakyThrows
+    public void simpleGeneric() {
+
+        JCodeModel model = new JCodeModel();
+        val type = model._class("tk.spop.meta.Test", ClassType.INTERFACE);
+        
+        val method = type.method(JMod.NONE, Object.class, "d");
+        val j  = method.generify("J");
+        method.type(j);
+        method.param(j, "ll");
+        
+        
 
         StringCodeWriter writer = new StringCodeWriter();
         model.build(writer);

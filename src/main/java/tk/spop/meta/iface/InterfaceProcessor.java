@@ -28,26 +28,16 @@ public class InterfaceProcessor extends EnhancedProcessor {
         val model = new JCodeModel();
         val helper = new CodeModelHelper(model);
         val type = model._class(getName(typeEl.getQualifiedName(), iface), ClassType.INTERFACE);
-
-        for (val tp : typeEl.getTypeParameters()) {
-            val bounds = new JTypeMultiple(null);
-            for (val bound : tp.getBounds()) {
-                val boundClass = (JClass) helper.getType(bound);
-                bounds.bound(boundClass);
-            }
-            type.generify(tp.getSimpleName().toString(), bounds);
-        }
+        
+        helper.generify(typeEl, type);
 
         for (ExecutableElement el : getMethods(typeEl)) {
 
+            val m = type.method(JMod.NONE, Object.class, el.getSimpleName().toString());
+            helper.generify(el, m);
+            
             JType returnType = helper.getType(el.getReturnType());
-            val m = type.method(JMod.NONE, returnType, el.getSimpleName().toString());
-            // val types = el.getTypeParameters();
-            // for (val t : types) {
-            // for (val bound : t.getBounds()) {
-            // val tt = m.generify(t.getSimpleName().toString());
-            // }
-            // }
+            m.type(returnType);
 
             for (val par : el.getParameters()) {
                 m.param(helper.getType(par.asType()), par.getSimpleName().toString());
