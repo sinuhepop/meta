@@ -28,6 +28,7 @@ public abstract class AptTests {
     public void clear() {
         for (val path : Arrays.asList(CLASS_OUTPUT, SOURCE_OUTPUT)) {
             val folder = locations.get(path);
+            folder.mkdirs();
             deleteFolder(folder);
             folder.mkdirs();
         }
