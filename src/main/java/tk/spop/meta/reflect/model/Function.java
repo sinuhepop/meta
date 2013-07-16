@@ -1,8 +1,8 @@
 package tk.spop.meta.reflect.model;
 
-public interface Method<C, T> extends Invocable<C>, Function<T> {
+public interface Function<T> extends Invocable<Object> {
 
-    T invoke(C target, Object... args);
+    T invoke(Object... args);
 
     Class<T> getReturnType();
 

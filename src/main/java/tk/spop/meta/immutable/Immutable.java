@@ -1,5 +1,5 @@
 package tk.spop.meta.immutable;
 
-public interface Immutable extends StructurallyImmutable {
+public interface Immutable extends Persistent {
 
 }

@@ -20,7 +20,7 @@ public class CodeModelTests {
         JCodeModel model = new JCodeModel();
         val type = model._class("tk.spop.meta.Test");
         type._extends(model.ref(ArrayList.class).narrow(Integer.class));
-        type._implements(StructurallyImmutable.class);
+        type._implements(Persistent.class);
         type._implements(model.ref("tk.spop.meta.Calamar"));
 
         val method = type.method(JMod.PROTECTED | JMod.ABSTRACT, type, "of");

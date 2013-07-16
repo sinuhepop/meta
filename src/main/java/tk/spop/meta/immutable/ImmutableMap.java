@@ -5,7 +5,7 @@ import java.util.*;
 import lombok.*;
 
 @EqualsAndHashCode
-public final class ImmutableMap<K, V> implements Map<K, V>, StructurallyImmutable {
+public final class ImmutableMap<K, V> implements Map<K, V>, Persistent {
 
     @Delegate
     private final Map<K, V> delegate;
