@@ -1,4 +1,4 @@
-package tk.spop.meta.x;
+package tk.spop.meta.util;
 
 import tk.spop.meta.immutable.Immutable;
 

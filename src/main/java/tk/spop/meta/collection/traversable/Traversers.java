@@ -1,5 +1,6 @@
 package tk.spop.meta.collection.traversable;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -17,5 +18,9 @@ public class Traversers {
             iterable = Collections.emptyList();
         }
         return of(iterable.iterator());
+    }
+
+    public static <T> Traverser<T> of(T element) {
+        return of(Arrays.asList(element));
     }
 }

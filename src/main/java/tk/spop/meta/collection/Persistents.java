@@ -132,7 +132,7 @@ public abstract class Persistents {
                 l.add(current);
             }
         }
-        return new List<T>(l);
+        return List.of(l);
     }
 
 }

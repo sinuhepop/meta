@@ -1,4 +1,4 @@
-package tk.spop.meta;
+package tk.spop.meta.processing;
 
 /**
  * Ensures @Override is used when possible.

@@ -6,7 +6,7 @@ import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.*;
 
-import tk.spop.meta.EnhancedProcessor;
+import tk.spop.meta.processing.EnhancedProcessor;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 //@SupportedAnnotationTypes("tk.spop.meta.reflect.Reflective")

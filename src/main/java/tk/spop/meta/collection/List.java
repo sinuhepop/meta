@@ -10,67 +10,18 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.RandomAccess;
 
 import tk.spop.meta.immutable.Persistent;
 import tk.spop.meta.reflect.model.PropertyAccessor;
+import tk.spop.meta.util.Option;
 
 public class List<T> implements Persistent, Iterable<T>, Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public static final class ListIterator<T> implements Iterator<T> {
-
-        private List<T> list;
-
-        public ListIterator(List<T> list) {
-            this.list = list;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return !list.isEmpty();
-        }
-
-        @Override
-        public T next() {
-            T head = list.head;
-            list = list.tail;
-            return head;
-        }
-
-        @Override
-        public void remove() {
-            throw new UnsupportedOperationException("Remove is not allowed in persistent collections.");
-        }
-
-    }
-
-    public static class Nil extends List<Object> {
-
-        private static final long serialVersionUID = 1013103129038883203L;
-
-        private Nil() {
-            super(null, null);
-        }
-
-        @Override
-        public Object head() {
-            throw new IndexOutOfBoundsException();
-        }
-
-        @Override
-        public List<Object> tail() {
-            throw new IndexOutOfBoundsException();
-        }
-
-        @Override
-        public boolean isEmpty() {
-            return true;
-        }
-
-    }
-
-    private static final List<Object> NIL = new Nil();
+    private static final List<Object> NIL = new List<>(null, null);
 
     private final T head;
     private final List<T> tail;
@@ -80,12 +31,28 @@ public class List<T> implements Persistent, Iterable<T>, Serializable {
         return (List<T>) NIL;
     }
 
-    public static <T> List<T> of(T[] array) {
-        List<T> current = nil();
-        for (int i = array.length - 1; i >= 0; i--) {
-            current = new List<T>(array[i], current);
+    @SafeVarargs
+    public static <T> List<T> of(T... array) {
+        return of(Arrays.asList(array));
+    }
+
+    public static <T> List<T> of(Iterable<T> iterable) {
+        List<T> list = nil();
+        for (T current : iterable) {
+            list = list.cons(current);
         }
-        return current;
+        return list.reverse();
+    }
+
+    public static <T> List<T> of(java.util.List<T> list) {
+        if (list instanceof RandomAccess) {
+            List<T> l = nil();
+            for (int i = list.size() - 1; i >= 0; i--) {
+                l = l.cons(list.get(i));
+            }
+            return l;
+        }
+        return of((Iterable<T>) list);
     }
 
     protected List(T head, List<T> tail) {
@@ -94,10 +61,16 @@ public class List<T> implements Persistent, Iterable<T>, Serializable {
     }
 
     public T head() {
+        if (tail == null) {
+            throw new NoSuchElementException();
+        }
         return head;
     }
 
     public List<T> tail() {
+        if (tail == null) {
+            throw new NoSuchElementException();
+        }
         return tail;
     }
 
@@ -106,18 +79,60 @@ public class List<T> implements Persistent, Iterable<T>, Serializable {
     }
 
     public List<T> cons(Iterable<T> iterable) {
-        // TODO
-        return null;
-    }
-
-    public List<T> append(Iterable<T> iterable) {
-        // TODO
-        return null;
+        List<T> l = this;
+        for (T current : of(iterable).reverse()) {
+            l = l.cons(current);
+        }
+        return l;
     }
 
     public List<T> append(T element) {
-        // TODO
-        return null;
+        List<T> l = nil();
+        l.cons(element);
+        for (T current : this.reverse()) {
+            l = l.cons(current);
+        }
+        return l;
+    }
+
+    public List<T> append(Iterable<T> iterable) {
+        List<T> l = of(iterable);
+        for (T current : this.reverse()) {
+            l = l.cons(current);
+        }
+        return l;
+    }
+
+    public List<T> update(int index, T value) {
+        List<T> reversed = nil();
+        List<T> l = this;
+        int i = 0;
+        while (i < index) {
+            reversed = reversed.cons(l.head());
+            l = l.tail;
+            i++;
+        }
+        l = l.tail().cons(value);
+        for (T current : reversed) {
+            l = l.cons(current);
+        }
+        return l;
+    }
+
+    public List<T> remove(int index) {
+        List<T> reversed = nil();
+        List<T> l = this;
+        int i = 0;
+        while (i < index) {
+            reversed = reversed.cons(l.head());
+            l = l.tail;
+            i++;
+        }
+        l = l.tail();
+        for (T current : reversed) {
+            l = l.cons(current);
+        }
+        return l;
     }
 
     public int size() {
@@ -200,7 +215,7 @@ public class List<T> implements Persistent, Iterable<T>, Serializable {
     public <S> List<S> map(PropertyAccessor<T, S> f) {
         List<S> list = nil();
         for (T current : this) {
-            list.cons(f.get(current));
+            list = list.cons(f.get(current));
         }
         return list.reverse();
     }
@@ -209,7 +224,7 @@ public class List<T> implements Persistent, Iterable<T>, Serializable {
         List<T> list = nil();
         for (T current : this) {
             if (f.get(current)) {
-                list.cons(current);
+                list = list.cons(current);
             }
         }
         return list.reverse();
@@ -271,6 +286,33 @@ public class List<T> implements Persistent, Iterable<T>, Serializable {
     @Override
     public String toString() {
         return Persistents.makeString(this);
+    }
+
+    public static final class ListIterator<T> implements Iterator<T> {
+
+        private List<T> list;
+
+        public ListIterator(List<T> list) {
+            this.list = list;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !list.isEmpty();
+        }
+
+        @Override
+        public T next() {
+            T head = list.head;
+            list = list.tail;
+            return head;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException("Remove is not allowed in persistent collections.");
+        }
+
     }
 
 }

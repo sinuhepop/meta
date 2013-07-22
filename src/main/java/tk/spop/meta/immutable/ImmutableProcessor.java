@@ -9,7 +9,7 @@ import javax.lang.model.element.*;
 import javax.lang.model.type.*;
 import javax.tools.Diagnostic;
 
-import tk.spop.meta.ProcessorUtils;
+import tk.spop.meta.processing.ProcessorUtils;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 @SupportedAnnotationTypes("*")
@@ -20,8 +20,7 @@ public class ImmutableProcessor extends AbstractProcessor {
             Integer.class.getName(), Float.class.getName(), Long.class.getName(), Double.class.getName(), //
             BigInteger.class.getName(), BigDecimal.class.getName(), //
             Locale.class.getName(), //
-            ImmutableList.class.getName(), ImmutableMap.class.getName(), ImmutableSet.class.getName() //
-            }));
+    }));
 
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment env) {

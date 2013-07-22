@@ -8,6 +8,10 @@ import javax.lang.model.element.*;
 
 import lombok.*;
 import tk.spop.meta.*;
+import tk.spop.meta.codegen.CodeModelHelper;
+import tk.spop.meta.codegen.ModelWriter;
+import tk.spop.meta.processing.EnhancedProcessor;
+import tk.spop.meta.processing.ProcessorUtils;
 
 import com.sun.codemodel.*;
 

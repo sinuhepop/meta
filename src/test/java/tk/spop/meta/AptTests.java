@@ -12,6 +12,8 @@ import lombok.*;
 
 import org.junit.*;
 
+import tk.spop.meta.codegen.CompilationResult;
+
 public abstract class AptTests {
 
     @SuppressWarnings("serial")

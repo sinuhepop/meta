@@ -1,4 +1,4 @@
-package tk.spop.meta;
+package tk.spop.meta.codegen;
 
 import java.io.*;
 

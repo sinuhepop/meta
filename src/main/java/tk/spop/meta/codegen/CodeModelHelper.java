@@ -1,4 +1,4 @@
-package tk.spop.meta.iface;
+package tk.spop.meta.codegen;
 
 import java.util.*;
 

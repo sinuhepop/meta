@@ -1,4 +1,4 @@
-package tk.spop.meta.collection;
+package tk.spop.meta.util;
 
 import java.util.LinkedHashMap;
 import java.util.concurrent.Callable;
