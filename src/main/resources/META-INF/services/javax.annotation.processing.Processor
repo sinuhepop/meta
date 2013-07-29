@@ -1,3 +1,5 @@
+tk.spop.meta.processing.MutableStaticProcessor
+tk.spop.meta.processing.OverrideProcessor
+tk.spop.meta.immutable.ImmutableProcessor
 tk.spop.meta.iface.InterfaceProcessor
 tk.spop.meta.reflect.ReflectiveProcessor
-tk.spop.meta.immutable.ImmutableProcessor

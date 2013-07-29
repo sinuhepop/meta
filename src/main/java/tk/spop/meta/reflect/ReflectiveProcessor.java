@@ -1,20 +1,24 @@
 package tk.spop.meta.reflect;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import javax.annotation.processing.*;
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 
 import tk.spop.meta.processing.EnhancedProcessor;
+import tk.spop.meta.util.Utils;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
-//@SupportedAnnotationTypes("tk.spop.meta.reflect.Reflective")
 public class ReflectiveProcessor extends EnhancedProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return asString(Reflective.class);
+        return Utils.set(Reflective.class.getName());
     }
 
     @Override

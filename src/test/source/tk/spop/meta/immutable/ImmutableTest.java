@@ -6,10 +6,10 @@ import tk.spop.meta.immutable.Immutable;
 @Getter
 public class ImmutableTest implements Immutable {
 
-    private final ImmutableChildTest a;
+    private final int value;
 
-    public ImmutableTest(int a) {
-        this.a = null;
+    public ImmutableTest(int value) {
+        this.value = value;
     }
 
 }

@@ -1,46 +1,56 @@
 package tk.spop.meta.iface;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
-import javax.lang.model.element.*;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
+import javax.lang.model.element.ExecutableElement;
+import javax.lang.model.element.Modifier;
+import javax.lang.model.element.Name;
+import javax.lang.model.element.TypeElement;
 
-import lombok.*;
-import tk.spop.meta.*;
+import lombok.SneakyThrows;
+import lombok.val;
 import tk.spop.meta.codegen.CodeModelHelper;
 import tk.spop.meta.codegen.ModelWriter;
 import tk.spop.meta.processing.EnhancedProcessor;
 import tk.spop.meta.processing.ProcessorUtils;
+import tk.spop.meta.util.Utils;
 
-import com.sun.codemodel.*;
+import com.sun.codemodel.ClassType;
+import com.sun.codemodel.JCodeModel;
+import com.sun.codemodel.JMod;
 
 @SupportedSourceVersion(SourceVersion.RELEASE_7)
 public class InterfaceProcessor extends EnhancedProcessor {
 
     @Override
     public Set<String> getSupportedAnnotationTypes() {
-        return new HashSet<>(Arrays.asList(Interface.class.getName()));
+        return Utils.set(Interface.class.getName());
     }
 
     @Override
     @SneakyThrows
     protected void process(Element element) {
 
-        TypeElement typeEl = (TypeElement) element;
+        val typeEl = (TypeElement) element;
         val iface = element.getAnnotation(Interface.class);
         val model = new JCodeModel();
         val helper = new CodeModelHelper(model);
         val type = model._class(getName(typeEl.getQualifiedName(), iface), ClassType.INTERFACE);
-        
+
         helper.generify(typeEl, type);
 
-        for (ExecutableElement el : getMethods(typeEl)) {
+        for (val el : getMethods(typeEl)) {
 
             val m = type.method(JMod.NONE, Object.class, el.getSimpleName().toString());
             helper.generify(el, m);
-            
-            JType returnType = helper.getType(el.getReturnType());
+
+            val returnType = helper.getType(el.getReturnType());
             m.type(returnType);
 
             for (val par : el.getParameters()) {
@@ -48,15 +58,15 @@ public class InterfaceProcessor extends EnhancedProcessor {
             }
         }
 
-        ModelWriter writer = new ModelWriter(processingEnv.getFiler());
+        val writer = new ModelWriter(processingEnv.getFiler());
         writer.write(model, element);
     }
 
     protected List<ExecutableElement> getMethods(TypeElement clss) {
-        List<ExecutableElement> methods = ProcessorUtils.getElements(clss, ExecutableElement.class, ElementKind.METHOD);
-        Iterator<ExecutableElement> it = methods.iterator();
+        val methods = ProcessorUtils.getElements(clss, ExecutableElement.class, ElementKind.METHOD);
+        val it = methods.iterator();
         while (it.hasNext()) {
-            ExecutableElement element = it.next();
+            val element = it.next();
             if (ProcessorUtils.is(element, Modifier.STATIC) || !ProcessorUtils.is(element, Modifier.PUBLIC)) {
                 it.remove();
             }

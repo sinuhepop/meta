@@ -1,11 +1,15 @@
 package tk.spop.meta.processing;
 
-import java.util.*;
+import java.util.Set;
+import java.util.TreeSet;
 
-import javax.annotation.processing.*;
-import javax.lang.model.element.*;
+import javax.annotation.processing.AbstractProcessor;
+import javax.annotation.processing.RoundEnvironment;
+import javax.lang.model.element.Element;
+import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
 
+@Deprecated
 public abstract class ProcessorAdapter extends AbstractProcessor {
 
     public Set<String> getSupportedAnnotationTypes() {

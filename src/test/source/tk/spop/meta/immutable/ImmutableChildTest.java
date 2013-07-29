@@ -6,11 +6,11 @@ import tk.spop.meta.immutable.ImmutableList;
 @Getter
 public class ImmutableChildTest extends ImmutableTest {
 
-    private final ImmutableList<ImmutableList<String>> b;
+    private final List<String> list;
 
-    public ImmutableChildTest(int a, int b) {
-        super(a);
-        this.b = null;
+    public ImmutableChildTest(int value, List<String> list) {
+        super(value);
+        this.list = list;
     }
 
 }

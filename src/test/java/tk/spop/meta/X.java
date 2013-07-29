@@ -53,6 +53,8 @@ public class X {
 
         int[] x = new int[100000000];
         System.out.println("Array size: " + x.length);
+
+        div();
     }
 
     private void infinite() {
@@ -63,5 +65,14 @@ public class X {
     private void infinite(String a, String b, String c, String d) {
         calls++;
         infinite(a, b, c, d);
+    }
+
+    @Test
+    public void div() {
+        double l = 1;
+        while (l > 0) {
+            l = l / 2;
+            System.out.println(l);
+        }
     }
 }
