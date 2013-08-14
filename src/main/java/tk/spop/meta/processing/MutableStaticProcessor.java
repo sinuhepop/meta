@@ -4,6 +4,8 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.Modifier;
+import javax.lang.model.element.TypeElement;
+import javax.lang.model.element.VariableElement;
 
 import lombok.val;
 
@@ -15,11 +17,16 @@ public class MutableStaticProcessor extends EnhancedProcessor {
 
     @Override
     protected void process(Element element) {
-        val fields = super.
-
+        if (element instanceof TypeElement) {
+            for (val member : super.getAllMembers((TypeElement) element)) {
+                if (member.getKind()==ElementKind.FIELD) {
+                    processField((VariableElement) member);
+                }
+            }
+        }
     }
 
-    private void processField(Element element) {
+    private void processField(VariableElement element) {
         val mods = element.getModifiers();
         if (mods.contains(Modifier.STATIC)) {
             if (!mods.contains(Modifier.FINAL)) {
