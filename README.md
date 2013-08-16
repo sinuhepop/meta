@@ -3,19 +3,20 @@ META
 
 **META** brings Java to a new level using mainly *APT processors* and adding some *functional programming* capabilities. Well, maybe some day it will...
 
-Features:
+**Features:**
 
- - [] Metamodel representing all members of a class, which can be accessed statically
- - [] Complex class member hierarchy
- - [] Persistent collections
+ - Metamodel representing all members of a class
+   - Static access
+   - Complex member hierarchy
+ - Persistent collections
    - List, Vector, Tree, Map, Set
    - Implementing functional programming methods (map, filter, fold)
- - [x] Immutability check
- - [] Interface extraction
- - [] Definition of constructors and static methods on interfaces and classes, which subclasses must implement
- - [] Warning when overriding or implementing a method without @Override
- - [] Warning on use of static mutable fields
- - [] And much more...
+ - Immutability check
+ - Interface extraction
+ - Definition of constructors and static methods on interfaces and classes, which subclasses must implement
+ - Warning when overriding or implementing a method without @Override
+ - Warning on use of static mutable fields
+ - And much more...
 
 Try it with Maven:
 
