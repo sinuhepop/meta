@@ -3,7 +3,7 @@ package tk.spop.meta.collection;
 import lombok.Data;
 import tk.spop.meta.collection.Map.Entry;
 
-public class Map<K, V> extends Tree<Entry<K, V>> {
+public class Map<K extends Comparable<K>, V> extends Tree<Entry<K, V>> {
 
     @Data
     public static class Entry<EK extends Comparable<EK>, EV> implements Comparable<Entry<EK, EV>> {
