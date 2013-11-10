@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import lombok.val;
+import tk.spop.meta.Meta;
 import tk.spop.meta.collection.traversable.Traversers;
 import tk.spop.meta.tuple.T2;
 import tk.spop.meta.tuple.T3;
@@ -70,7 +71,7 @@ public abstract class Persistents {
             for (int i = 0; i < n; i++) {
                 values[i] = iterators[i].next();
             }
-            list.cons(Tuple.of(values));
+            list.cons(Meta.t(values));
         }
 
         switch (mode) {
@@ -79,7 +80,7 @@ public abstract class Persistents {
                     for (int i = 0; i < n; i++) {
                         values[i] = iterators[i].hasNext() ? iterators[i].next() : null;
                     }
-                    list.cons(Tuple.of(values));
+                    list.cons(Meta.t(values));
                 }
                 break;
 

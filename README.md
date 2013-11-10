@@ -30,8 +30,8 @@ Try it with Maven:
 
 	<repositories>
 		<repository>
-			<id>meta</id>
-			<url>https://raw.github.com/sinuhepop/meta/repo</url>
+			<id>spop</id>
+			<url>https://raw.github.com/sinuhepop/repo/master</url>
 		</repository>
 	</repositories>
 

@@ -1,0 +1,11 @@
+http://www.agical.com/jambda/
+https://bitbucket.org/stepancheg/bolts/wiki/Home
+http://www.codeproject.com/Articles/43740/Functional-Java
+https://code.google.com/p/lambdaj/
+http://ocamljava.x9c.fr/
+https://code.google.com/p/jcurry/
+http://www.fun4j.org/tutorial-api.html
+http://functionalj.sourceforge.net/
+
+
+http://lambdaj.googlecode.com/svn/trunk/html/apidocs/ch/lambdaj/Lambda.html#on(java.lang.Class)

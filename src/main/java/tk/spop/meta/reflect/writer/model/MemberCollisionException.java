@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lombok.val;
+import tk.spop.meta.Meta;
 import tk.spop.meta.tuple.T2;
-import tk.spop.meta.tuple.Tuple;
 
 public class MemberCollisionException extends RuntimeException {
 
@@ -14,7 +14,7 @@ public class MemberCollisionException extends RuntimeException {
     private final List<T2<MemberInfo, MemberInfo>> list = new ArrayList<>();
 
     public void add(MemberInfo a, MemberInfo b) {
-        list.add(Tuple.t(a, b));
+        list.add(Meta.t(a, b));
     }
 
     @Override
@@ -22,12 +22,12 @@ public class MemberCollisionException extends RuntimeException {
         val sb = new StringBuilder();
         sb.append(list.size()).append(" collisions found.");
         for (val c : list) {
-            sb.append("  \n").append(c._1()).append(" === ").append(c._2());
+            sb.append("  \n").append(c._1).append(" === ").append(c._2);
         }
         return sb.toString();
     }
 
-    public void throwIfNeeded() {
+    public void throwIfNotEmpty() {
         if (!list.isEmpty()) {
             throw this;
         }

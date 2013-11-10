@@ -1,18 +1,23 @@
 package tk.spop.meta.tuple;
 
-@SuppressWarnings("unchecked")
-public class T1<P1> extends Tuple {
+import static lombok.AccessLevel.NONE;
+import lombok.Data;
+import lombok.Getter;
 
-    protected T1(Object... args) {
-        super(args);
+@Data
+@Getter(NONE)
+public class T1<P1> implements Tuple {
+
+    public final P1 _1;
+
+    @Override
+    public int getSize() {
+        return 1;
     }
 
-    public T1(P1 p1) {
-        super(p1);
-    }
-
-    public P1 _1() {
-        return (P1) get(0);
+    @Override
+    public Object[] toArray() {
+        return new Object[] { _1 };
     }
 
 }

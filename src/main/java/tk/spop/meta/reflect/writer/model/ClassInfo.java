@@ -3,7 +3,6 @@ package tk.spop.meta.reflect.writer.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.PriorityQueue;
 
 import lombok.Data;
 import lombok.val;
@@ -11,24 +10,24 @@ import lombok.val;
 @Data
 public class ClassInfo {
 
-    private String name;
-
-    private final PriorityQueue<MemberInfo> members = new PriorityQueue<MemberInfo>();
+    private final String name;
+    private final List<MemberInfo> members = new ArrayList<MemberInfo>();
 
     public void add(MemberInfo member) {
         members.add(member);
     }
 
     public void checkNames() {
+        Collections.sort(members);
         val ex = new MemberCollisionException();
         MemberInfo previous = null;
         for (val member : members) {
-            if (member.compareTo(previous) == 0) {
+            if (previous != null && member.compareTo(previous) == 0) {
                 ex.add(previous, member);
             }
             previous = member;
         }
-        ex.throwIfNeeded();
+        ex.throwIfNotEmpty();
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +40,16 @@ public class ClassInfo {
         }
         Collections.sort(list);
         return list;
+    }
+
+    public void rename(MemberInfo member, String name) {
+        for (val m : members) {
+            if (m.sameSignature(member)) {
+                m.setName(name);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Member not found: " + member);
     }
 
 }
