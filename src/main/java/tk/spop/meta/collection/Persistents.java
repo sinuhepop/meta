@@ -136,4 +136,19 @@ public abstract class Persistents {
         return List.of(l);
     }
 
+    public static List<Object> flatten(Iterable<?> iterable) {
+        LinkedList<Object> list = new LinkedList<>();
+        flattenAux(iterable, list);
+        return List.of(list);
+    }
+
+    private static void flattenAux(Object object, LinkedList<Object> list) {
+        if (object instanceof Iterable) {
+            for (val x : (Iterable<?>) object) {
+                flattenAux(x, list);
+            }
+        } else {
+            list.add(object);
+        }
+    }
 }
