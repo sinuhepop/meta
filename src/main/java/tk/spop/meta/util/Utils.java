@@ -16,8 +16,4 @@ public class Utils {
         return set;
     }
 
-    public static String fromLastDot(String s) {
-        return s.substring(s.lastIndexOf('.') + 1);
-    }
-
 }

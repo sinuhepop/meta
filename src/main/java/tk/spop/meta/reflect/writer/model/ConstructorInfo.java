@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Data
-@ToString(callSuper = true)
+@ToString(callSuper = false)
 @EqualsAndHashCode(callSuper = true)
 public class ConstructorInfo extends MemberInfo {
 

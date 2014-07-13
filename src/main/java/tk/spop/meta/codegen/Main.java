@@ -14,17 +14,17 @@ public class Main {
 
     @SneakyThrows
     public static void main(String[] args) {
- 
+
         val source = new File(args[0]);
         source.mkdirs();
- 
+
         val builders = Arrays.asList(
 
-        new ReflectionBuilder(Object.class) //
+        new ReflectionBuilder(Object.class, true) //
                 .renameMethod("waitMillis", "wait", long.class) //
                 .renameMethod("waitNanos", "wait", long.class, int.class),
 
-        new ReflectionBuilder(String.class) //
+        new ReflectionBuilder(String.class, true) //
                 .renameConstructor("fromArray", byte[].class) //
                 .renameConstructor("fromArrayHiBite", byte[].class, int.class) //
                 .renameConstructor("fromSubarray", byte[].class, int.class, int.class) //
@@ -34,9 +34,7 @@ public class Main {
                 .renameConstructor("fromArrayCharsetName", byte[].class, String.class) //
                 .renameConstructor("fromArrayCharset", byte[].class, Charset.class) //
                 .renameConstructor("fromCharArray", char[].class) //
-                .renameConstructor("fromCharArrayInternal", char[].class, boolean.class) //
                 .renameConstructor("fromCharSubarray", char[].class, int.class, int.class) //
-                .renameConstructor("fromCharSubarrayInternal", int.class, int.class, char[].class) //
                 .renameConstructor("fromUnicodes", int[].class, int.class, int.class) //
                 .renameConstructor("fromString", String.class) //
                 .renameConstructor("fromStringBuffer", StringBuffer.class) //
@@ -59,6 +57,7 @@ public class Main {
                 .renameMethod("indexOfFromIndex", "indexOf", int.class, int.class) //
                 .renameMethod("indexOfString", "indexOf", String.class) //
                 .renameMethod("indexOfStringFromIndex", "indexOf", String.class, int.class) //
+                .renameMethod("joinIterable", "join", CharSequence.class, Iterable.class) //
                 .renameMethod("lastIndexOfFromIndex", "lastIndexOf", int.class, int.class) //
                 .renameMethod("lastIndexOfString", "lastIndexOf", String.class) //
                 .renameMethod("lastIndexOfStringFromIndex", "lastIndexOf", String.class, int.class) //

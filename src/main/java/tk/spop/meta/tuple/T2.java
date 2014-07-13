@@ -26,4 +26,15 @@ public class T2<P1, P2> implements Tuple {
         return new Object[] { _1, _2 };
     }
 
+    public <X> T2<X, P2> with1(X x) {
+        return Meta.t(x, _2);
+    }
+
+    public <X> T2<P1, X> with2(X x) {
+        return Meta.t(_1, x);
+    }
+
+    public <X> T3<P1, P2, X> plus(X x) {
+        return Meta.t(_1, _2, x);
+    }
 }

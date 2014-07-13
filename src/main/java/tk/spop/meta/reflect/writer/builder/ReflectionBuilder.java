@@ -3,6 +3,9 @@ package tk.spop.meta.reflect.writer.builder;
 import static java.lang.reflect.Modifier.isPrivate;
 import static java.lang.reflect.Modifier.isStatic;
 
+import java.lang.reflect.Member;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,32 +22,33 @@ import tk.spop.meta.reflect.writer.model.TypeInfo;
 public class ReflectionBuilder {
 
     private final ClassInfo delegate;
+    private final boolean onlyPublic;
 
-    public ReflectionBuilder(Class<?> clss) {
+    public ReflectionBuilder(Class<?> clss, boolean onlyPublic) {
 
         delegate = new ClassInfo(clss.getName());
+        this.onlyPublic = onlyPublic;
 
         for (val m : clss.getDeclaredConstructors())
-            if (!isPrivate(m.getModifiers())) //
+            if (isValid(m)) //
                 delegate.add(new ConstructorInfo( //
                         ConstructorInfo.DEFAULT_CONSTRUCTOR_NAME, //
                         getTypes(m.getGenericParameterTypes())));
 
         for (val m : clss.getDeclaredFields())
-            if (!isPrivate(m.getModifiers())) //
+            if (isValid(m)) //
                 delegate.add(new FieldInfo( //
                         m.getName(), //
                         isStatic(m.getModifiers()), //
                         getType(m.getGenericType())));
 
         for (val m : clss.getDeclaredMethods())
-            if (!isPrivate(m.getModifiers())) //
+            if (isValid(m)) //
                 delegate.add(new MethodInfo( //
                         m.getName(), //
                         isStatic(m.getModifiers()), //
                         getType(m.getGenericReturnType()), //
                         getTypes(m.getGenericParameterTypes())));
-
     }
 
     public ReflectionBuilder renameField(String name, String oldName) {
@@ -71,7 +75,13 @@ public class ReflectionBuilder {
     }
 
     private static TypeInfo getType(Type type) {
-        return new TypeInfo(type.toString());
+        return new TypeInfo(type.getTypeName());
+    }
+
+    private boolean isValid(Member m) {
+        val mods = m.getModifiers();
+        return !m.isSynthetic() && //
+                (onlyPublic ? Modifier.isPublic(mods) : !isPrivate(mods));
     }
 
 }
